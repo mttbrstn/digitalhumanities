@@ -14,9 +14,9 @@ Matt Burstein
 
 """
 
-import re
 import collections
 import sys
+import string
 # from pprint import pprint
 
 
@@ -42,9 +42,15 @@ for item in words:
 
 sane_text = sanitize_text(lcwords)
 
+
+def strip_punctuation(s):
+    """Return the text without (hopefully...) any punctuation.
+    >>> strip_punctuation('this.is?as!funny@word') == 'thisisasfunnyword'
+    """
+    return ''.join(ch for ch in s if ch not in string.punctuation)
+
 freq = collections.Counter(sane_text)
 for item in list(freq.most_common()):
     items = str(item)
-    fitems = items.strip('\"\'()[]" ')
-    clean = re.sub('\.|\'|;|:', '', fitems)
-    print(re.sub(',', ':', clean))
+    fitems = strip_punctuation(items)
+    print(fitems)
