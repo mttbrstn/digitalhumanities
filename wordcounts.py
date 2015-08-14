@@ -53,4 +53,5 @@ freq = collections.Counter(sane_text)
 for item in list(freq.most_common()):
     items = str(item)
     fitems = strip_punctuation(items)
-    print(fitems)
+    complete = fitems.split(" ")
+    print(complete[0] + ": " + complete[1])
